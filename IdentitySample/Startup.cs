@@ -69,27 +69,6 @@
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
-            // Config identity
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    //options.Password.RequireDigit = false;
-            //    //options.Password.RequiredLength = 6;
-            //    //options.Password.RequireLowercase = false;
-            //    //options.Password.RequireNonAlphanumeric = false;
-            //    //options.Password.RequireUppercase = false;
-
-            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-            //    options.Lockout.MaxFailedAccessAttempts = 5;
-
-            //    options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(90);
-            //    options.Cookies.ApplicationCookie.LoginPath = "/Account/Login";
-            //    options.Cookies.ApplicationCookie.LogoutPath = "/Account/Logout";
-
-            //    options.User.RequireUniqueEmail = true;
-
-            //    options.SignIn.RequireConfirmedEmail = true;
-            //});
-
             // Authorization policies
             services.AddAuthorization(config =>
             {
