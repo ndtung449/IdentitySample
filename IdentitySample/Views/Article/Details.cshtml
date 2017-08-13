@@ -1,0 +1,66 @@
+@model ArticleViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortContent)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShortContent)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+    </dl>
+</div>
+@if (await ArticleService.AuthorizeAsync(User, Model.Id, OperationRequirements.Activate))
+{
+    @if (!Model.IsActivated)
+    {
+        <form asp-action="SetStatus" asp-controller="Article" style="display:inline;">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="isActivated" value="true" />
+            <button type="submit" class="btn btn-xs btn-success">Activate</button>
+        </form>
+    }
+    else
+    {
+        <form asp-action="SetStatus" asp-controller="Article" style="display:inline;">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="isActivated" value="false" />
+            <button type="submit" class="btn btn-xs btn-danger">Deactivate</button>
+        </form>
+    }
+}
+
+<div>
+    @if (await ArticleService.AuthorizeAsync(User, Model.Id, OperationRequirements.Update))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        <text> | </text>
+    }
+    <a asp-action="Index">Back to List</a>
+</div>
